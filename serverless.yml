@@ -1,0 +1,33 @@
+service: serverless-example
+
+plugins:
+  - serverless-webpack
+  # - serverless-dynamodb-local
+  # - serverless-plugin-typescript
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+
+# custom:
+#   tableName: 'users-table-dev'
+#   dynamodb:
+#     start:
+#       migrate: true
+
+# functions:
+  # hello:
+  #   handler: handler.hello
+  #   events:
+  #     - http:
+  #         path: hello
+  #         method: get
+
+functions:
+  app:
+    handler: handler.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
