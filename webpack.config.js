@@ -4,26 +4,50 @@ const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
 	devtool: 'source-map',
-
 	entry: slsw.lib.entries,
-	// entry: './handler.ts',
 	target: 'node',
 	externals: [nodeExternals()],
 	module: {
-		loaders: [{
-			test: /\.ts(x?)$/,
-			loader: 'ts-loader'
-		}]
-	},
-	// resolve: {
-	// 	extensions: ['.ts', '.js', '.tsx', '.jsx', '']
-	// },
-	output: {
-		devtoolModuleFilenameTemplate: '[absolute-resource-path]',
-		devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]',
 
-		libraryTarget: 'commonjs',
-		path: path.resolve(__dirname, '.webpack'),
-		filename: 'handler.js',
+		rules: [
+
+			// {
+			// 	test: /\.ts(x?)$/,
+			// 	// loaders: ['babel-loader', 'ts-loader']
+			// 	loader: 'ts-loader'
+			// },
+
+			{
+				test: /\.js(x?)$/,
+				loader: 'babel-loader',
+				options: {
+					presets: ['es2015']
+				}
+			},
+
+
+		],
+
 	},
+	resolve: {
+		extensions: [
+			'.js',
+			'.json',
+			'.ts',
+		],
+		// modules: [
+		// 	'node_modules',
+		// path.resolve(__dirname, 'app')
+		// ],
+	},
+	// output: {
+	// 	devtoolModuleFilenameTemplate: '[absolute-resource-path]',
+	// 	devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]',
+
+	// 	// library: true,
+	// 	// libraryTarget: 'commonjs2',
+
+	// 	path: path.resolve(__dirname, '.webpack'),
+	// 	filename: '[name].js',
+	// },
 }

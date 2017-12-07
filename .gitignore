@@ -1,5 +1,6 @@
 .webpack
 .vscode
+.build
 
 # package directories
 node_modules

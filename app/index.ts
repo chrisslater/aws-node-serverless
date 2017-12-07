@@ -1,5 +1,6 @@
 import { Callback, Context } from 'aws-lambda'
 import * as Hapi from 'hapi'
+import { routes } from './routes'
 
 type HttpMethod = 'GET' | 'POST'
 
@@ -36,13 +37,9 @@ interface Response {
 // @ts-ignore Will be solved when @types/hapi updates to v17
 const server = Hapi.Server() as Hapi.Server
 
-server.route({
-  method: 'GET',
-  path: '/hello',
-  handler: function (request) {
-    return 'Hello, world!'
-  },
-})
+
+
+routes.forEach((route) => server.route(route))
 
 interface HapiRequest {
   method: string
@@ -52,7 +49,7 @@ interface HapiRequest {
   validate: boolean
 }
 
-exports.handler = async (event: Event, context: Context, callback: Callback) => {
+export const handler = async (event: Event, context: Context, callback: Callback) => {
   const options: HapiRequest | Hapi.InjectedRequestOptions = {
     method: event.httpMethod,
     url: event.path,
