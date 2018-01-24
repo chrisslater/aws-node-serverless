@@ -1,6 +1,6 @@
 import { Callback, Context } from 'aws-lambda'
 import * as Hapi from 'hapi'
-import { routes } from './routes'
+import * as Routes from './routes'
 
 type HttpMethod = 'GET' | 'POST'
 
@@ -39,7 +39,7 @@ const server = Hapi.Server() as Hapi.Server
 
 
 
-routes.forEach((route) => server.route(route))
+Routes.routes.forEach((route: Hapi.RouteConfiguration) => server.route(route))
 
 interface HapiRequest {
   method: string

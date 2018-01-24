@@ -1,7 +1,8 @@
-import { routes as helloRoutes } from './hello'
-import { routes as usersRoutes } from './users'
+import * as Hapi from 'hapi'
+import * as hello from './hello'
+import * as users from './users'
 
-export const routes = [].concat(
-	usersRoutes,
-	helloRoutes,
+export const routes = [].concat.apply(
+	hello.routes,
+	users.routes,
 )

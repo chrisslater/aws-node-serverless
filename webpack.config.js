@@ -11,23 +11,20 @@ module.exports = {
 
 		rules: [
 
-			// {
-			// 	test: /\.ts(x?)$/,
-			// 	// loaders: ['babel-loader', 'ts-loader']
-			// 	loader: 'ts-loader'
-			// },
-
 			{
-				test: /\.js(x?)$/,
-				loader: 'babel-loader',
-				options: {
-					presets: ['es2015']
-				}
+				test: /\.ts(x?)$/,
+				loader: 'ts-loader'
 			},
 
+			// {
+			// 	test: /\.js(x?)$/,
+			// 	loader: 'babel-loader',
+			// 	options: {
+			// 		presets: ['es2015']
+			// 	},
+			// },
 
 		],
-
 	},
 	resolve: {
 		extensions: [
@@ -35,19 +32,5 @@ module.exports = {
 			'.json',
 			'.ts',
 		],
-		// modules: [
-		// 	'node_modules',
-		// path.resolve(__dirname, 'app')
-		// ],
 	},
-	// output: {
-	// 	devtoolModuleFilenameTemplate: '[absolute-resource-path]',
-	// 	devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]',
-
-	// 	// library: true,
-	// 	// libraryTarget: 'commonjs2',
-
-	// 	path: path.resolve(__dirname, '.webpack'),
-	// 	filename: '[name].js',
-	// },
 }

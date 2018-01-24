@@ -1,32 +1,29 @@
 service: serverless-example
 
 plugins:
-  # - serverless-webpack
-  # - serverless-dynamodb-local
-  - serverless-plugin-typescript
+  - serverless-webpack
+  # - serverless-plugin-typescript
+  - serverless-dynamodb-local
+  # - serverless-dynamodb-client
   - serverless-offline
 
 custom:
-  tableName: 'users-table-${self:provider.stage}'
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+      # Uncomment only if you already have a DynamoDB running locally
+    # noStart: true
 
-provider:
-  name: aws
-  runtime: nodejs6.10
-  stage: dev
-  # region: us-east-1
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource:
-        - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn" ] }
-  environment:
-    USERS_TABLE: ${self:custom.tableName}
+    seed:
+      test:
+        sources:
+          - table: users-table
+            sources: [./data/users.json]
+
+  tableName: 'users-table'
 
 resources:
   Resources:
@@ -34,17 +31,38 @@ resources:
       Type: 'AWS::DynamoDB::Table'
       Properties:
         AttributeDefinitions:
-          -
-            AttributeName: userId
+          - AttributeName: userId
             AttributeType: S
+          # - AttributeName: firstname
+          #   AttributeType: S
         KeySchema:
-          -
-            AttributeName: userId
+          - AttributeName: userId
             KeyType: HASH
+          # - AttributeName: firstname
+          #   KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.tableName}
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  # region: us-east-1
+  # iamRoleStatements:
+  #   - Effect: Allow
+  #     Action:
+  #       - dynamodb:Query
+  #       - dynamodb:Scan
+  #       - dynamodb:GetItem
+  #       - dynamodb:PutItem
+  #       - dynamodb:UpdateItem
+  #       - dynamodb:DeleteItem
+  #     Resource:
+  #       - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn" ] }
+  # environment:
+  #   USERS_TABLE: ${self:custom.tableName}
 
 functions:
   app:

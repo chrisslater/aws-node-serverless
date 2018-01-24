@@ -1,6 +1,9 @@
 .webpack
 .vscode
-.build
+build
+
+# test
+coverage
 
 # package directories
 node_modules

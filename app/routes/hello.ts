@@ -1,7 +1,9 @@
-export const routes = [{
+import * as Hapi from 'hapi'
+
+export const routes: Hapi.RouteConfiguration[] = [{
 	method: 'GET',
 	path: '/',
-	handler: function (request) {
+	handler: function () {
 		return 'Hello, worlds!'
 	},
 }]
