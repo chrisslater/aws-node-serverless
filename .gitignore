@@ -1,5 +1,5 @@
 .webpack
-.vscode
+#.vscode
 build
 
 # test
