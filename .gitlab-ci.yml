@@ -1,0 +1,8 @@
+before_script:
+  - curl -sL https://deb.nodesource.com/setup_6.x | bash -
+  - apt-get update -qq && apt-get install -y -qq nodejs
+
+install_project:
+  script:
+    - yarn
+
