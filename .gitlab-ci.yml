@@ -1,4 +1,4 @@
-image: 6.12.3-alpine
+image: node:6.12.3-alpine
 
 before_script:
   - apk update && apk upgrade
