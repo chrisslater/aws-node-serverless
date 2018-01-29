@@ -2,10 +2,9 @@ image: node:6.12.3-alpine
 
 before_script:
   - apk update && apk upgrade
-  # - curl -sL https://deb.nodesource.com/setup_6.x | bash -
-  # - apt-get update -qq && apt-get install -y -qq nodejs && apt-get install yarn
 
 install_project:
   script:
     - yarn
+    - yarn lerna run test
 

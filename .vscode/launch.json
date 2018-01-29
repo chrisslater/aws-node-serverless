@@ -10,9 +10,42 @@
 				"DEV",
 				"TESTS"
 			]
+		},
+		{
+			"name": "Launch all",
+			"configurations": [
+				"HELLO_DEV",
+				"HELLO_TESTS"
+			]
 		}
 	],
 	"configurations": [
+		{
+			"type": "node",
+			"request": "attach",
+			"name": "Attach",
+			"port": 9229,
+			"protocol": "legacy",
+			"cwd": "${workspaceFolder}/services/hello",
+			"sourceMaps": true,
+			"stopOnEntry": true
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "HELLO_DEV",
+			"sourceMaps": true,
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			// "program": "${workspaceFolder}/services/hello/node_modules/.bin/sls",
+			"program": "${workspaceFolder}/node_modules/.bin/sls",
+			"cwd": "${workspaceFolder}/services/hello",
+			"runtimeExecutable": "node",
+			"args": [
+				"offline",
+				"start",
+			],
+		},
 		{
 			"type": "node",
 			"request": "launch",

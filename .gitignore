@@ -1,6 +1,5 @@
 .webpack
-#.vscode
-build
+.build
 
 # test
 coverage
@@ -11,3 +10,5 @@ jspm_packages
 
 # Serverless directories
 .serverless
+
+lerna-debug.log

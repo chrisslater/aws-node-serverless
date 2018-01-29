@@ -1,0 +1,16 @@
+{
+	"npmClient": "yarn",
+	"npmClientArgs": [
+		"--production",
+		"--no-optional"
+	],
+	"packages": [
+		"services/*"
+	],
+	"commands": {
+		"deploy": "sls deploy"
+	},
+	"lerna": "2.1.2",
+	"version": "0.0.0",
+	"useWorkspaces": true
+}

@@ -1,0 +1,47 @@
+{
+  "name": "hello",
+  "version": "1.0.0",
+  "main": "app/index.ts",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "watch": "sls run --watch",
+    "test": "jest",
+    "test:watch": "node --inspect-brk ./node_modules/.bin/jest --runInBand --watch",
+    "deploy": "sls deploy"
+  },
+  "devDependencies": {
+    "@types/boom": "^4.3.9",
+    "@types/jest": "^21.1.8",
+    "serverless": "^1.24.1",
+    "serverless-plugin-webpack": "^1.3.0",
+    "serverless-webpack": "^4.1.0",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0",
+    "serverless-offline": "^3.16.0",
+    "jest": "^21.2.1"
+  },
+  "dependencies": {
+    "boom": "^5.2.0"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.json"
+      }
+    },
+    "collectCoverage": true,
+    "mapCoverage": true,
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
+  }
+}

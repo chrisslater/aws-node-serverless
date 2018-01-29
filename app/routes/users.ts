@@ -26,16 +26,7 @@ export async function postUsersHandler(request: Hapi.Request): Promise<Users.IUs
 
 	if (!payload) throw Boom.badRequest('Bad data')
 
-	try {
-		return await db.create(payload)
-	} catch (error) {
-		switch (error.name) {
-			case 'ValidationError':
-				throw Boom.badRequest(error.message)
-			default:
-				throw error
-		}
-	}
+	return await db.create(payload)
 }
 
 routes.push({

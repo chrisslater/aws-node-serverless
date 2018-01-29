@@ -1,0 +1,23 @@
+service: hello-service
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: eu-west-2
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack: ./webpack.config.js
+  webpackIncludeModules:
+    packagePath: './package.json'
+
+functions:
+  hello:
+      handler: app/index.handler
+      events:
+        - http:
+            path: hello
+            method: get
