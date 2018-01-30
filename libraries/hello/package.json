@@ -1,0 +1,37 @@
+{
+	"name": "@snapperfish/library-hello",
+	"version": "0.0.2",
+	"main": "./build/index.js",
+	"typings": "./build/index.d.ts",
+	"license": "MIT",
+	"private": false,
+	"scripts": {
+		"test": "jest",
+		"test:watch": "node --inspect-brk ./node_modules/.bin/jest --runInBand --watch"
+	},
+	"devDependencies": {
+		"@types/jest": "^21.1.8",
+		"jest": "^21.2.1",
+		"typescript": "^2.6.2"
+	},
+	"jest": {
+		"globals": {
+			"ts-jest": {
+				"tsConfigFile": "tsconfig.json"
+			}
+		},
+		"collectCoverage": true,
+		"mapCoverage": true,
+		"transform": {
+			"^.+\\.tsx?$": "ts-jest"
+		},
+		"testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js",
+			"jsx",
+			"json"
+		]
+	}
+}
