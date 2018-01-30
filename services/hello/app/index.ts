@@ -40,7 +40,7 @@ export const handler = (event: Event, context: Context, callback: Callback) => {
 	try {
 		const response = {
 			statusCode: 200,
-			body: JSON.stringify(hello('Chris')),
+			body: JSON.stringify(hello('Chris!')),
 			isBase64Encoded: false
 		}
 
