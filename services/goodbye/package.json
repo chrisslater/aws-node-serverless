@@ -1,6 +1,6 @@
 {
 	"name": "goodbye",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"main": "app/index.ts",
 	"license": "MIT",
 	"private": false,
@@ -15,8 +15,5 @@
 		"serverless-webpack": "^4.1.0",
 		"typescript": "^2.6.2",
 		"webpack": "^3.10.0"
-	},
-	"dependencies": {
-
 	}
 }
