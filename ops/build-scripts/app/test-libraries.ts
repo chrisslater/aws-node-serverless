@@ -1,5 +1,5 @@
 import * as sh from 'shelljs'
-import * as util 'util'
+import * as util from 'util'
 import * as fs from 'fs'
 import * as path from 'path'
 
@@ -35,14 +35,13 @@ interface Package {
 	name: string
 }
 
+
 const retrieveUpdatedPackagesInNamespace = (namespace: string): Array<Package> => {
 	const {
 		stdout,
 		stderr,
 		code,
-	} = sh.exec(`yarn --silent lerna updated --scope @snapperfish/${namespace}-* --json`, {
-			silent: true
-		})
+	} = sh.exec(`yarn --silent lerna updated --scope @snapperfish/${namespace}-* --json`)
 
 	if (code !== 0) {
 		sh.echo('No packages need updating...')
@@ -50,7 +49,7 @@ const retrieveUpdatedPackagesInNamespace = (namespace: string): Array<Package> =
 		sh.exit(0)
 	}
 
-	return JSON.parse(stdout) as Array<Package>
+	return JSON.parse(stdout as string) as Array<Package>
 }
 
 const getPackageDirectory = (name: string): string => {

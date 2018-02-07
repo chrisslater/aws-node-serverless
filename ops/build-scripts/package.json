@@ -14,8 +14,12 @@
 	},
 	"devDependencies": {
 		"@types/jest": "^21.1.8",
+		"@types/shelljs": "^0.7.8",
 		"jest": "^21.2.1",
 		"typescript": "^2.6.2"
+	},
+	"dependencies": {
+		"shelljs": "^0.7.8"
 	},
 	"jest": {
 		"globals": {
