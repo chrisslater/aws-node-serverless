@@ -6,5 +6,5 @@ before_script:
 install_project:
   script:
     - yarn
-    - yarn lerna run test
+    - yarn test:libraries
 

@@ -1,5 +1,5 @@
 {
-  "name": "hello",
+  "name": "service-hello",
   "version": "0.1.0",
   "main": "app/index.ts",
   "license": "MIT",
@@ -22,7 +22,8 @@
     "webpack": "^3.10.0"
   },
   "dependencies": {
-    "boom": "^5.2.0"
+    "boom": "^5.2.0",
+    "@snapperfish/library-hello": "^0.0.2"
   },
   "jest": {
     "globals": {

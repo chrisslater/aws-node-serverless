@@ -12,3 +12,4 @@ jspm_packages
 .serverless
 
 lerna-debug.log
+yarn-error.log

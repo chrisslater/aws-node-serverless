@@ -1,11 +1,13 @@
 {
-	"name": "@snapperfish/library-hello",
-	"version": "0.0.2",
+	"name": "@snapperfish/build-scripts",
+	"version": "1.0.0",
 	"main": "./build/index.js",
 	"typings": "./build/index.d.ts",
 	"license": "MIT",
 	"private": false,
 	"scripts": {
+		"postinstall": "./node_modules/.bin/tsc",
+		"watch": "tsc -w -d",
 		"test": "jest",
 		"test:ci": "jest --json --outputFile=\"./test-results.json\"",
 		"test:watch": "node --inspect-brk ./node_modules/.bin/jest --runInBand --watch"

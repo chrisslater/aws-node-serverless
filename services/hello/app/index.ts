@@ -1,5 +1,6 @@
 import { Callback, Context } from 'aws-lambda'
 import * as Boom from 'boom'
+import * as hello from '@snapperfish/library-hello'
 
 type HttpMethod = 'GET' | 'POST'
 
@@ -33,14 +34,12 @@ interface Response {
 	body: string
 }
 
-export const hello = (name: string): string => `Hello ${name}`
-
 export const handler = (event: Event, context: Context, callback: Callback) => {
 
 	try {
 		const response = {
 			statusCode: 200,
-			body: JSON.stringify(hello('Chris')),
+			body: JSON.stringify(hello.hello('Chris')),
 			isBase64Encoded: false
 		}
 

@@ -5,7 +5,9 @@
     "--no-optional"
   ],
   "packages": [
-    "services/*"
+    "services/*",
+    "libraries/*",
+    "ops/*"
   ],
   "commands": {
     "deploy": "sls deploy"

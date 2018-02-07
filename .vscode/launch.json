@@ -22,6 +22,28 @@
 	"configurations": [
 		{
 			"type": "node",
+			"request": "launch",
+			"name": "Scripts test-libraries 2",
+			"runtimeExecutable": "node",
+			"sourceMaps": true,
+			"program": "${workspaceFolder}/scripts/test-libraries.js",
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Script test-libraries",
+			"program": "${workspaceFolder}/ops/build-scripts/build/test-libraries.js",
+			"cwd": "${workspaceFolder}",
+			"sourceMaps": true,
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Script deploy",
+			"program": "${workspaceFolder}/scripts/deploy.js"
+		},
+		{
+			"type": "node",
 			"request": "attach",
 			"name": "Attach",
 			"port": 9229,
