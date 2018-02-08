@@ -5,6 +5,7 @@ before_script:
 
 install_project:
   script:
+    - git show
     - yarn
     - yarn lerna updated
     - yarn test:libraries
