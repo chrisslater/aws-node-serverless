@@ -5,7 +5,7 @@ variables:
   GIT_CHECKOUT: "master"
 
 before_script:
-  - apk update && apk upgrade && apk git
+  - apk update && apk upgrade && apk add git
   - cd /builds/snapperfish/serverless-example
 
 install_project:
