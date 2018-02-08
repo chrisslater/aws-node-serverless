@@ -2,10 +2,11 @@ image: node:6.12.3-alpine
 
 variables:
   GIT_STRATEGY: clone
-  GIT_CHECKOUT: "false"
+  GIT_CHECKOUT: "master"
 
 before_script:
   - apk update && apk upgrade
+  - cd /builds/snapperfish/serverless-example
 
 install_project:
   script:
