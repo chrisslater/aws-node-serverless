@@ -1,5 +1,9 @@
 image: node:6.12.3-alpine
 
+variables:
+  GIT_STRATEGY: clone
+  GIT_CHECKOUT: "false"
+
 before_script:
   - apk update && apk upgrade
 
