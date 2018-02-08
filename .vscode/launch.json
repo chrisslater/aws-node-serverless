@@ -26,6 +26,7 @@
 			"name": "Scripts test-libraries 2",
 			"runtimeExecutable": "node",
 			"sourceMaps": true,
+			"cwd": "${workspaceFolder}",
 			"program": "${workspaceFolder}/scripts/test-libraries.js",
 		},
 		{

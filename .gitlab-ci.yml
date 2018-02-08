@@ -6,11 +6,10 @@ variables:
 
 before_script:
   - apk update && apk upgrade && apk add git
-  - cd /builds/snapperfish/serverless-example
+  # - cd /builds/snapperfish/serverless-example
 
 install_project:
   script:
-    - git show
     - yarn
     - yarn lerna updated
     - yarn test:libraries

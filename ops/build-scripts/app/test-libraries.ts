@@ -5,6 +5,8 @@ import * as path from 'path'
 
 const testResultsFilename = '__test-results.json'
 
+const cwd = process.cwd()
+
 interface TestResults {
 	name: string
 	success: boolean
@@ -19,14 +21,10 @@ const printResults = ({
 	passedTests
 }: TestResults): void => {
 	if (success) {
-		console.log(`${name}: Tests ran successfully`)
 		sh.echo(`${name}: Tests ran successfully`)
 	} else if (passedTests === totalTests) {
-		console.log(`${name}: Coverage failed to meet minimum threshold`)
 		sh.echo(`${name}: Coverage failed to meet minimum threshold`)
 	} else {
-		// else Tests failed
-		console.log(`${name}: Tests Failed`)
 		sh.echo(`${name}: Tests Failed`)
 	}
 }
@@ -36,17 +34,17 @@ interface Package {
 }
 
 
-const retrieveUpdatedPackagesInNamespace = (namespace: string): Array<Package> => {
+const retrieveUpdatedPackagesInNamespace = (namespace: string): Array<Package> | false => {
 	const {
 		stdout,
 		stderr,
 		code,
-	} = sh.exec(`yarn --silent lerna updated --scope @snapperfish/${namespace}-* --json`)
+	} = sh.exec(`yarn --silent lerna updated --scope ${namespace} --json`)
 
 	if (code !== 0) {
 		sh.echo('No packages need updating...')
 		sh.echo('or failed =/')
-		sh.exit(0)
+		return false
 	}
 
 	return JSON.parse(stdout as string) as Array<Package>
@@ -64,8 +62,9 @@ const getPackageDirectory = (name: string): string => {
 }
 
 const runTest = async (pkg: Package): Promise<TestResults> => {
-	sh.echo(`START: ${pkg.name} tests`)
+	sh.cd(cwd)
 
+	// If empty string, exit early.
 	const packageDir = getPackageDirectory(pkg.name)
 
 	sh.cd(packageDir)
@@ -80,7 +79,7 @@ const runTest = async (pkg: Package): Promise<TestResults> => {
 		numTotalTests,
 	} = require(fileRequirePath)
 
-	await sh.exec(`rm ${testResultsFilename}`)
+	await sh.exec(`rm ${packageDir}/${testResultsFilename}`)
 
 	return {
 		name: pkg.name,
@@ -90,9 +89,20 @@ const runTest = async (pkg: Package): Promise<TestResults> => {
 	}
 }
 
-export const run = async () => {
-	const packages: Array<Package> = retrieveUpdatedPackagesInNamespace('library')
-	const results = await Promise.all(packages.map(runTest))
+export const test = (namespace: string): void => {
+	const packages = retrieveUpdatedPackagesInNamespace(namespace)
 
-	results.forEach(printResults)
+	if (!packages) {
+		sh.echo(`No Results for ${namespace}`)
+		return
+	}
+
+	Promise.all(packages.map(runTest))
+		.then((results) => {
+			sh.echo('/* =======  <Test Results>  =========== */')
+			sh.echo('')
+			results.forEach(printResults)
+			sh.echo('')
+			sh.echo('/* =======  </ Test Results>  =========== */')
+		})
 }

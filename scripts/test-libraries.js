@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 const {
-	run
+	test
 } = require('@snapperfish/build-scripts')
 
-run()
+test('@snapperfish/library-*')
+test('@snapperfish/service-*')

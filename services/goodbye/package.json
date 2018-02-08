@@ -1,5 +1,5 @@
 {
-	"name": "service-goodbye",
+	"name": "@snapperfish/service-goodbye",
 	"version": "0.0.1",
 	"main": "app/index.ts",
 	"license": "MIT",
