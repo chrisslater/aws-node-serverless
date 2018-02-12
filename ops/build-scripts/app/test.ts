@@ -7,34 +7,19 @@ const testResultsFilename = '__test-results.json'
 
 const cwd = process.cwd()
 
-interface TestResults {
+export interface TestResults {
 	name: string
 	success: boolean
 	totalTests: number
 	passedTests: number
 }
 
-const printResults = ({
-	name,
-	success,
-	totalTests,
-	passedTests
-}: TestResults): void => {
-	if (success) {
-		sh.echo(`${name}: Tests ran successfully`)
-	} else if (passedTests === totalTests) {
-		sh.echo(`${name}: Coverage failed to meet minimum threshold`)
-	} else {
-		sh.echo(`${name}: Tests Failed`)
-	}
-}
-
-interface Package {
+export interface Package {
 	name: string
 }
 
 
-const retrieveUpdatedPackagesInNamespace = (namespace: string): Array<Package> | false => {
+const getUpdatedPackagesInNamespace = (namespace: string): Array<Package> | false => {
 	const {
 		stdout,
 		stderr,
@@ -42,8 +27,6 @@ const retrieveUpdatedPackagesInNamespace = (namespace: string): Array<Package> |
 	} = sh.exec(`yarn --silent lerna updated --scope ${namespace} --json`)
 
 	if (code !== 0) {
-		sh.echo('No packages need updating...')
-		sh.echo('or failed =/')
 		return false
 	}
 
@@ -89,20 +72,12 @@ const runTest = async (pkg: Package): Promise<TestResults> => {
 	}
 }
 
-export const test = (namespace: string): void => {
-	const packages = retrieveUpdatedPackagesInNamespace(namespace)
+export const test = (namespace: string): Promise<TestResults[]> | false => {
+	const packages = getUpdatedPackagesInNamespace(namespace)
 
 	if (!packages) {
-		sh.echo(`No Results for ${namespace}`)
-		return
+		return false
 	}
 
-	Promise.all(packages.map(runTest))
-		.then((results) => {
-			sh.echo('/* =======  <Test Results>  =========== */')
-			sh.echo('')
-			results.forEach(printResults)
-			sh.echo('')
-			sh.echo('/* =======  </ Test Results>  =========== */')
-		})
+	return Promise.all(packages.map(runTest))
 }

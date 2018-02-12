@@ -27,7 +27,9 @@
 			"runtimeExecutable": "node",
 			"sourceMaps": true,
 			"cwd": "${workspaceFolder}",
-			"program": "${workspaceFolder}/scripts/test-libraries.js",
+			"program": "${workspaceFolder}/build/scripts/test.js",
+			"console": "integratedTerminal",
+			"protocol": "inspector"
 		},
 		{
 			"type": "node",

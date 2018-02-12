@@ -14,6 +14,7 @@ const {
 if (code !== 0) {
 	console.log('No packages need updating...')
 	console.log('or failed =/')
+	return false;
 }
 
 const updated = JSON.parse(stdout)

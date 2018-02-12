@@ -4,5 +4,6 @@ const {
 	test
 } = require('@snapperfish/build-scripts')
 
-test('@snapperfish/library-*')
-test('@snapperfish/service-*')
+const libraryResults = test('@snapperfish/library-*')
+
+const serviceResults = test('@snapperfish/service-*')
